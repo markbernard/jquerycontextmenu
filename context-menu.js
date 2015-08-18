@@ -1,3 +1,4 @@
+/*global $, menu, setTimeout, window */
 var menu = {
     defaultBackgroundColour: "#eee",
     defaultForegroundColour: "black",
@@ -5,16 +6,16 @@ var menu = {
     init: function (bindId, defaults) {
         "use strict";
         menu[bindId] = {};
-        
+
         if (defaults.preMenu !== undefined) {
             menu[bindId].preMenu = defaults.preMenu;
         } else {
-            menu[bindId].preMenu = function (){};
+            menu[bindId].preMenu = function (){/*user implementation only*/};
         }
         if (defaults.postMenu !== undefined) {
             menu[bindId].postMenu = defaults.postMenu;
         } else {
-            menu[bindId].postMenu = function (){};
+            menu[bindId].postMenu = function (){/*user implementation only*/};
         }
         menu[bindId].items = defaults.items;
         if (defaults.type !== undefined) {
@@ -30,7 +31,7 @@ var menu = {
             $("#menu-container-" + bindId).remove();
             menu[bindId].preMenu(target, menu[bindId]);
             menuContent = "<div id=\"menu-container-" + bindId + "\" class=\"menu " + menu.types[menu[bindId].type] + "\"><ul>";
-            
+
             menu[bindId].items.forEach(function (option, index) {
                 if (option.label === "separator") {
                     menuContent += "<hr/>";
