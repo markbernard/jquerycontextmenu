@@ -1,0 +1,45 @@
+.menu {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+
+.menu hr {
+    border-color: #ccc;
+}
+.menu li {
+    list-style-type: none;
+    cursor: pointer;
+}
+.menu li:hover {
+    background-color: #ddd;
+    list-style-type: none;
+}
+
+.menu ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.standard li {
+    padding: 5px 0px 5px 0px;
+}
+
+.standard hr {
+    margin: 10px 0px 10px 0px;
+    padding: 0px;
+}
+
+.compact li {
+    padding: 1px 0px 1px 0px;
+}
+
+.compact hr {
+    margin: 3px 0px 3px 0px;
+    padding: 0px;
+    height: 5px;
+}
