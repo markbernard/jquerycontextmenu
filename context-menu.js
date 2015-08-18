@@ -52,7 +52,7 @@ var menu = {
             menu[bindId].postMenu(target);
             setTimeout(function () {
                 var menuTop = eventObject.pageY,
-                    menuLeft = eventObject.pageX;
+                    menuLeft = eventObject.pageX + 5;
                 $("body").on("click", function () {
                     $("#menu-container-" + bindId).hide();
                 });
