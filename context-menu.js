@@ -69,32 +69,3 @@ var menu = {
         });
     }
 };
-$(function () {
-    "use strict";
-    menu.init("test", {
-        preMenu: function (target, menuObject) {
-            console.log(" pre (override): " + target.attr("id"));
-        },
-        postMenu: function (target) {
-            console.log("post (override): " + target.attr("id"));
-        },
-        items: [
-            {
-                label: "Menu 01", 
-                action: function (target){console.log("Menu 01: " + target.attr("id"));}
-            }, {
-                label: "Menu 02", 
-                action: function (target){console.log("Menu 02: " + target.attr("id"));}
-            }, {
-                label: "separator"
-            }, {
-                label: "Menu 03", 
-                action: function (target){console.log("Menu 03: " + target.attr("id"));}
-            }, {
-                label: "Menu 04", 
-                action: function (target){console.log("Menu 04: " + target.attr("id"));}
-            }
-        ],
-        type: 1
-    });
-});
