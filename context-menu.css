@@ -1,7 +1,8 @@
 .menu {
     border: 1px solid #ddd;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
     position: absolute;
     top: 10px;
     left: 10px;
