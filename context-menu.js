@@ -26,47 +26,49 @@ var menu = {
         menu[bindId].color = menu.defaultBackgroundColour;
 
         $("#" + bindId).bind("contextmenu", function (eventObject) {
-            var menuContent, target = $(eventObject.delegateTarget);
+            var menuContent, menuContinue, target = $(eventObject.delegateTarget);
 
             $("#menu-container-" + bindId).remove();
-            menu[bindId].preMenu(target, menu[bindId]);
-            menuContent = "<div id=\"menu-container-" + bindId + "\" class=\"menu " + menu.types[menu[bindId].type] + "\"><ul>";
+            menuContinue = menu[bindId].preMenu(target, menu[bindId]);
+            if (menuContinue === undefined || menuContinue === true) {
+                menuContent = "<div id=\"menu-container-" + bindId + "\" class=\"menu " + menu.types[menu[bindId].type] + "\"><ul>";
 
-            menu[bindId].items.forEach(function (option, index) {
-                if (option.label === "separator") {
-                    menuContent += "<hr/>";
-                } else {
-                    menuContent += "<li id=\"menu-" + bindId + "-" + index + "\">" + option.label + "</li>";
-                }
-            });
-            menuContent += "</ul></div>";
-            $("body").append(menuContent);
-            $(".menu").css("background-color", menu[bindId].color);
-            menu[bindId].items.forEach(function (option, index) {
-                if (option.label !== "separator") {
-                    $("#menu-" + bindId + "-" + index).on("click", function () {
-                        option.action(target);
-                    });
-                }
-            });
-            menu[bindId].postMenu(target);
-            setTimeout(function () {
-                var menuTop = eventObject.pageY,
-                    menuLeft = eventObject.pageX + 5;
-                $("body").on("click", function () {
-                    $("#menu-container-" + bindId).hide();
+                menu[bindId].items.forEach(function (option, index) {
+                    if (option.label === "separator") {
+                        menuContent += "<hr/>";
+                    } else {
+                        menuContent += "<li id=\"menu-" + bindId + "-" + index + "\">" + option.label + "</li>";
+                    }
                 });
-                if (menuTop + $("#menu-container-" + bindId).height() > $(window).height()) {
-                    menuTop = $(window).height() - ($("#menu-container-" + bindId).height() + 15);
-                }
-                if (menuLeft + $("#menu-container-" + bindId).width() > $(window).width()) {
-                    menuLeft = $(window).width() - ($("#menu-container-" + bindId).width() + 15);
-                }
-                $("#menu-container-" + bindId).css({top: menuTop + "px", left: menuLeft + "px"});
-                $("#menu-container-" + bindId).show();
-            }, 20);
-
+                menuContent += "</ul></div>";
+                $("body").append(menuContent);
+                $(".menu").css("background-color", menu[bindId].color);
+                menu[bindId].items.forEach(function (option, index) {
+                    if (option.label !== "separator") {
+                        $("#menu-" + bindId + "-" + index).on("click", function () {
+                            option.action(target);
+                        });
+                    }
+                });
+                menu[bindId].postMenu(target);
+                setTimeout(function () {
+                    var menuTop = eventObject.pageY,
+                        menuLeft = eventObject.pageX + 15;
+                    $("body").on("click", function () {
+                        $("#menu-container-" + bindId).hide();
+                    });
+                    if (menuTop + $("#menu-container-" + bindId).height() > $(window).height()) {
+                        menuTop = $(window).height() - ($("#menu-container-" + bindId).height() + 15);
+                    }
+                    if (menuLeft + $("#menu-container-" + bindId).width() > $(window).width()) {
+                        menuLeft = $(window).width() - ($("#menu-container-" + bindId).width() + 15);
+                    }
+                    $("#menu-container-" + bindId).css({top: menuTop + "px", left: menuLeft + "px"});
+                    $("#menu-container-" + bindId).show();
+                }, 20);
+            }
             return false;
+            
         });
     }
 };
