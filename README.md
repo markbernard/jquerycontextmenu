@@ -3,4 +3,4 @@ Simple context menu that uses JQuery
 
 TODO
  - add sub menus
- - stream line menu creation
+ - streamline menu creation
