@@ -2,7 +2,6 @@
 var menu = {
     defaultBackgroundColour: "#eee",
     defaultForegroundColour: "black",
-    compact: false,
     registeredMenus: {},
     init: function (bindId, defaults) {
         "use strict";
@@ -22,9 +21,11 @@ var menu = {
         }
         menu.registeredMenus[bindId].items = defaults.items;
         if (defaults.compact !== undefined) {
-            menu.compact = defaults.compact;
+            menu.registeredMenus[bindId].compact = defaults.compact;
+        } else {
+            menu.registeredMenus[bindId].compact = false;
         }        
-        if (menu.compact) {
+        if (menu.registeredMenus[bindId].compact) {
             type = "compact";
         } else {
             type = "standard";
