@@ -21,6 +21,9 @@ var menu = {
             menu.registeredMenus[bindId].postMenu = function (){/*user implementation only*/};
         }
         menu.registeredMenus[bindId].items = defaults.items;
+        if (defaults.compact !== undefined) {
+            menu.compact = defaults.compact;
+        }        
         if (menu.compact) {
             type = "compact";
         } else {
