@@ -1,3 +1,12 @@
+/*!
+ * context-menu.js
+ * Context sensitive menu in Javascript
+ * https://github.com/markbernard/jquerycontextmenu
+ *
+ * Copyright (c) 2015, Mark Bernard
+ * Released under the MIT license
+ */
+
 /*global $, menu, setTimeout, window */
 var menu = {
     defaultBackgroundColour: "white",
