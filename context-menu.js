@@ -1,6 +1,6 @@
 /*global $, menu, setTimeout, window */
 var menu = {
-    defaultBackgroundColour: "#eee",
+    defaultBackgroundColour: "white",
     defaultForegroundColour: "black",
     registeredMenus: {},
     init: function (bindId, defaults) {
@@ -26,9 +26,9 @@ var menu = {
             menu.registeredMenus[bindId].compact = false;
         }        
         if (menu.registeredMenus[bindId].compact) {
-            type = "compact";
+            type = "menu-compact";
         } else {
-            type = "standard";
+            type = "menu-standard";
         }
         menu.registeredMenus[bindId].color = menu.defaultBackgroundColour;
 
