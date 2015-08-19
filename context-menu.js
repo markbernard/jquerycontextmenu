@@ -2,38 +2,44 @@
 var menu = {
     defaultBackgroundColour: "#eee",
     defaultForegroundColour: "black",
-    types: ["standard", "compact"],
+    compact: false,
+    registeredMenus: {},
     init: function (bindId, defaults) {
         "use strict";
-        menu[bindId] = {};
+        var type;
+        
+        menu.registeredMenus[bindId] = {};
 
         if (defaults.preMenu !== undefined) {
-            menu[bindId].preMenu = defaults.preMenu;
+            menu.registeredMenus[bindId].preMenu = defaults.preMenu;
         } else {
-            menu[bindId].preMenu = function (){/*user implementation only*/};
+            menu.registeredMenus[bindId].preMenu = function (){/*user implementation only*/};
         }
         if (defaults.postMenu !== undefined) {
-            menu[bindId].postMenu = defaults.postMenu;
+            menu.registeredMenus[bindId].postMenu = defaults.postMenu;
         } else {
-            menu[bindId].postMenu = function (){/*user implementation only*/};
+            menu.registeredMenus[bindId].postMenu = function (){/*user implementation only*/};
         }
-        menu[bindId].items = defaults.items;
-        if (defaults.type !== undefined) {
-            menu[bindId].type = defaults.type;
+        menu.registeredMenus[bindId].items = defaults.items;
+        if (menu.compact) {
+            type = "compact";
         } else {
-            menu[bindId].type = 0;
+            type = "standard";
         }
-        menu[bindId].color = menu.defaultBackgroundColour;
+        menu.registeredMenus[bindId].color = menu.defaultBackgroundColour;
 
         $("#" + bindId).bind("contextmenu", function (eventObject) {
-            var menuContent, menuContinue, target = $(eventObject.delegateTarget);
+            var menuContent, menuContinue, target = eventObject.delegateTarget;
 
-            $("#menu-container-" + bindId).remove();
-            menuContinue = menu[bindId].preMenu(target, menu[bindId]);
+            for (var registeredMenu in menu.registeredMenus) {
+                console.log(registeredMenu);
+                $("#menu-container-" + registeredMenu).remove();
+            }
+            menuContinue = menu.registeredMenus[bindId].preMenu(target, menu.registeredMenus[bindId]);
             if (menuContinue === undefined || menuContinue === true) {
-                menuContent = "<div id=\"menu-container-" + bindId + "\" class=\"menu " + menu.types[menu[bindId].type] + "\"><ul>";
+                menuContent = "<div id=\"menu-container-" + bindId + "\" class=\"menu " + type + "\"><ul>";
 
-                menu[bindId].items.forEach(function (option, index) {
+                menu.registeredMenus[bindId].items.forEach(function (option, index) {
                     if (option.label === "separator") {
                         menuContent += "<hr/>";
                     } else {
@@ -42,15 +48,15 @@ var menu = {
                 });
                 menuContent += "</ul></div>";
                 $("body").append(menuContent);
-                $(".menu").css("background-color", menu[bindId].color);
-                menu[bindId].items.forEach(function (option, index) {
+                $(".menu").css("background-color", menu.registeredMenus[bindId].color);
+                menu.registeredMenus[bindId].items.forEach(function (option, index) {
                     if (option.label !== "separator") {
                         $("#menu-" + bindId + "-" + index).on("click", function () {
                             option.action(target);
                         });
                     }
                 });
-                menu[bindId].postMenu(target);
+                menu.registeredMenus[bindId].postMenu(target);
                 setTimeout(function () {
                     var menuTop = eventObject.pageY,
                         menuLeft = eventObject.pageX + 15;
