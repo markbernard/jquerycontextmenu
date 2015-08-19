@@ -1,3 +1,12 @@
+/*!
+ * context-menu.css
+ * Styles for context sensitive menu in Javascript
+ * https://github.com/markbernard/jquerycontextmenu
+ *
+ * Copyright (c) 2015, Mark Bernard
+ * Released under the MIT license
+ */
+
 .menu {
     border: 1px solid #ddd;
     padding: 5px;
