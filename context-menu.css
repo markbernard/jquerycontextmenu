@@ -25,24 +25,24 @@
     padding: 0px;
 }
 
-.standard li {
+.menu-standard li {
     padding: 5px 0px 5px 0px;
 }
 
-.standard hr {
+.menu-standard hr {
     margin: 10px 0px 10px 0px;
     padding: 0px;
 }
 
-.compact {
+.menu-compact {
     font-size: 0.8em;
 }
 
-.compact li {
+.menu-compact li {
     padding: 1px 0px 1px 0px;
 }
 
-.compact hr {
+.menu-compact hr {
     margin: 3px 0px 3px 0px;
     padding: 0px;
     height: 5px;
